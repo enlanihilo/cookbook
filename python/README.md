@@ -9,9 +9,11 @@
   - [x] Making HTTP requests
   - [x] Parsing JSON
   - [x] Creating a CSV file
+  - [x] OOP concepts
   - Making database connections
   - [x] Playing an audio file
   - Multithreading
   - Drawing 2D graphics to screen
   - Drawing 3D graphics to screen
   - GUI programming
+  
