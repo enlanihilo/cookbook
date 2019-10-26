@@ -16,9 +16,9 @@ from tkinter import *
     | 7  | 8  | 9  | X |            long numbers stretch the window
     | 4  | 5  |  6 | - |            
     | 1  | 2  |  3 | + |        Todo:
-    | 0  | << |  . | = |            implement operate function XXXXXXXXXXXXX
+    | 0  | << |  . | = |            implement operate function [DONE]XXXXXXXXXXXXX
     --------------------            implemente operation with negative numbers
-                                    let the user insert numbers with keyboard
+                                    let the user insert numbers with keyboard [DONE]XXXXXXXXXXXX
 """
 
 class App:
@@ -47,12 +47,16 @@ class App:
 
         def backspace():
 
-            if self.queue_str[-1] in self.operations:
-                self.operating = False
+            try:
+                if self.queue_str[-1] in self.operations:
+                    self.operating = False
 
-            #delete last character and update display
-            self.queue_str = self.queue_str[:-1]
-            updateDisplay(self.queue_str)
+                #delete last character and update display    
+                self.queue_str = self.queue_str[:-1]
+                updateDisplay(self.queue_str)
+
+            except:
+                print("There is nothing to cancel.")
 
 
         def onclick(char):
@@ -72,9 +76,6 @@ class App:
                 self.queue_str += char
                 updateDisplay(self.queue_str)  
 
-        #TODO
-        def negative_operate(a, b, operation_todo):
-            pass
 
         def operate():
             operation_str = self.queue_str
@@ -82,11 +83,9 @@ class App:
             a = b = ""
             operation_todo = ""
             #working on: Operation with Negative numbers
-
-            if self.negative_result == True:
-                negative_operate(a, b, operation_todo)
             
-            else: #int operations
+             #int operations
+            if self.negative_result == False:
                 for i in operation_str:
                     if got_first_var == False:
                         if i not in self.operations:
@@ -104,10 +103,14 @@ class App:
                         #store number after operation in a variable
                         b += i
 
+            if self.negative_result == True:
+                #TODO
+                pass
             
+
             #time to process operation
             operation_result = 0
-            a = float(a)        # ValueError problem
+            a = float(a)        
             b = float(b)
             if operation_todo == "*":
                 operation_result = a * b
@@ -161,25 +164,47 @@ class App:
 
         #capturing keyboard input
         def keypressed(event):
-            #event.keysym returns <key> as a str.
-            
-            print(f"keysym = {event.keysym}")
-            #onclick(event.keysym)
+            #print(f"keysym = {event.keysym}")
+
+            if event.keysym == "c":
+                cancel()          
+            elif event.keysym == "plus":
+                onclick("+")
+            elif event.keysym == "slash":
+                onclick("/")
+            elif event.keysym == "minus":
+                onclick("-")
+            elif event.keysym == "Return":
+                operate()
+            elif event.keysym == "percent":
+                onclick("%")
+            elif event.keysym == "asterisk":
+                onclick("*")
+            elif event.keysym == "BackSpace":
+                backspace()
+            else:
+                onclick(event.keysym)
 
         #callback receives event as parameter by default
-        master.bind("<0>", keypressed) 
-        master.bind("<9>", keypressed)
-        master.bind("<8>", keypressed)
-        master.bind("<7>", keypressed)
-        master.bind("<6>", keypressed)  # from 6 to 9 it works. and 0
-        master.bind("<5>", keypressed)
-        master.bind("<4>", keypressed)
-        master.bind("<3>", keypressed)
-        master.bind("<2>", keypressed)
-        master.bind("<1>", keypressed)
+        master.bind("<Key-0>", keypressed)  
+        master.bind("<Key-9>", keypressed)  
+        master.bind("<Key-8>", keypressed)  
+        master.bind("<Key-7>", keypressed)  
+        master.bind("<Key-6>", keypressed)  
+        master.bind("<Key-5>", keypressed)  
+        master.bind("<Key-4>", keypressed)  
+        master.bind("<Key-3>", keypressed)  
+        master.bind("<Key-2>", keypressed)   
+        master.bind("<Key-1>", keypressed)
+        master.bind("<c>", keypressed)
+        master.bind("<plus>", keypressed)
+        master.bind("<slash>", keypressed)
+        master.bind("<minus>", keypressed)
+        master.bind("<Return>", keypressed)
+        master.bind("<percent>", keypressed)
+        master.bind("<asterisk>", keypressed)
+        master.bind("<BackSpace>", keypressed)
         
-        #master.bin() implement backspace
-
 
 root = Tk()
 app = App(root)
