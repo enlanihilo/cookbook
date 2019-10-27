@@ -11,14 +11,13 @@ from tkinter import *
      __________________
     |                  |        Grid Geometry Manager
      __________________         
-    | C | +/- | % | /  |        Bugs:
+    | << | +/- | % | / |        Bugs:
     |------------------|            can add > 1 operator [SOLVED]xxxxxxx
     | 7  | 8  | 9  | X |            long numbers stretch the window
     | 4  | 5  |  6 | - |            
     | 1  | 2  |  3 | + |        Todo:
-    | 0  | << |  . | = |            implement operate function [DONE]XXXXXXXXXXXXX
-    --------------------            implemente operation with negative numbers
-                                    let the user insert numbers with keyboard [DONE]XXXXXXXXXXXX
+    | 0  |  Clear  | = |            +/- functionality
+    --------------------            
 """
 
 class App:
@@ -26,9 +25,10 @@ class App:
     def __init__(self, master):
         self.queue_str = ""
         self.operating = False
-        self.negative_result = False
         self.operations =  ("+", "-", "/", "%", "*")
-        queue_display = []
+        self.queue_display = []
+        self.operation_todo = ""
+        self.operator_idx = 0
         str_display = StringVar()
         master.columnconfigure(1, weight=1)
         display = Label(master, textvariable=str_display, bg="grey").grid(row=0, column=1, sticky=W+E)
@@ -41,13 +41,16 @@ class App:
         def cancel():
             self.queue_str = ""
             self.operating = False
-            queue_display.clear()
+            self.queue_display.clear()
             updateDisplay(self.queue_str)
 
 
         def backspace():
 
             try:
+                if len(self.queue_str) == 0:
+                    cancel()
+
                 if self.queue_str[-1] in self.operations:
                     self.operating = False
 
@@ -60,12 +63,16 @@ class App:
 
 
         def onclick(char):
-        
+
             if len(self.queue_str) > 0:
-                if self.queue_str[-1] in self.operations:
+                if self.queue_str[0] == "-":
+                    pass
+
+                if self.queue_str[-1] in self.operations and len(self.queue_str) > 1:
                     self.operating = True
-                    #self.queue_str += char
-                    #updateDisplay(self.queue_str)
+                    self.operation_todo = self.queue_str[-1]
+                    self.queue_display.append(self.queue_str[:-1])
+                    
 
             if self.operating == True:
                 if char not in self.operations:
@@ -78,62 +85,41 @@ class App:
 
 
         def operate():
-            operation_str = self.queue_str
-            got_first_var = False
-            a = b = ""
-            operation_todo = ""
-            #working on: Operation with Negative numbers
-            
-             #int operations
-            if self.negative_result == False:
-                for i in operation_str:
-                    if got_first_var == False:
-                        if i not in self.operations:
-                            #store first number in b variable
-                            a += i
-                        else:
-                            #time to store values in the a variable
-                            got_first_var = True
-                            
-                            for x in self.operations:
-                                if i == x:
-                                    operation_todo = x
-                                    break
-                    else:
-                        #store number after operation in a variable
-                        b += i
+            #grab the operator index so you can grab the 2nd number 
+            for c in self.queue_str:
+                if self.queue_str.find(c) > 0 and c == self.operation_todo:
+                    self.operator_idx =  self.queue_str.find(c)
+            #append to the self.queue_display
+            self.queue_display.append(self.queue_str[self.operator_idx+1:])
 
-            if self.negative_result == True:
-                #TODO
-                pass
+            #calculation time:
+            #print(f"Todo: {self.queue_display[0]} {self.operation_todo} {self.queue_display[1]}")
             
-
-            #time to process operation
-            operation_result = 0
-            a = float(a)        
-            b = float(b)
-            if operation_todo == "*":
-                operation_result = a * b
-            elif operation_todo == "/":
-                operation_result = a / b
-            elif operation_todo == "%":
-                operation_result = a % b
-            elif operation_todo == "+":
-                operation_result = a + b
-            elif operation_todo == "-":
-                operation_result = a - b
-            
-            cancel()
-            if operation_result < 0:
-                self.negative_result = True
+            if self.queue_display[0][0] == "-":
+                a = float(self.queue_display[0][1:])
+                a *= -1
             else:
-                self.negative_result = False
+                a = float(self.queue_display[0])
 
-            self.queue_str = str(operation_result)
-            updateDisplay(self.queue_str)
+            b = float(self.queue_display[1])
+            if self.operation_todo == "+":
+                result = a + b
+            if self.operation_todo == "-":
+                result = a - b
+            if self.operation_todo == "%":
+                result = a % b
+            if self.operation_todo == "/":
+                result = a / b
+            if self.operation_todo == "*":
+                result = a * b
+
+            result = str(result)
+            cancel()
+            updateDisplay(result)
+
 
         #1st row
-        Button(text="C", width=6, fg="red", command=cancel).grid(row=1)
+        Button(text="<<", width=6, fg="red", command=backspace).grid(row=1)
         Button(text="+/-", width=6).grid(row=1, column=1)
         Button(text="%", width=6, command=lambda: onclick("%")).grid(row=1, column=2)
         Button(text="/", width=6, command=lambda: onclick("/")).grid(row=1, column=3)
@@ -158,8 +144,7 @@ class App:
 
         #5th row
         Button(text="0", width=6, command=lambda: onclick("0")).grid(row=5)
-        Button(text="<<", width=6, fg="red", command=backspace).grid(row=5, column=1)
-        Button(text=".", width=6).grid(row=5, column=2)
+        Button(text="Clear", width=6, fg="red", command=cancel).grid(row=5, column=1)
         Button(text="=", width=6, command=operate).grid(row=5, column=3)
 
         #capturing keyboard input
