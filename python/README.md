@@ -12,8 +12,8 @@
   - [x] OOP concepts
   - [x] Making database connections
   - [x] Playing an audio file
-  - Multithreading
-  - Drawing 2D graphics to screen
-  - Drawing 3D graphics to screen
-  - GUI programming
+  - [x] Multithreading
+  - [x] Drawing 2D graphics to screen
+  - [x] Drawing 3D graphics to screen
+  - [x] GUI programming
   
