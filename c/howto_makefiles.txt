@@ -1,0 +1,48 @@
+### What is make
+A tool which controls the generation of executables from source files.
+it reads the instructions of how to build a program from a file called
+*makefile* 
+
+### Make capabilities:
+- automatic configuration/updates
+- not limited to a specific language nor a package
+
+### Rules and Targets
+
+A simple makefile consists of **rules** with the following shape:
+
+```
+target:  dependencies ...
+		 commands
+		 ...
+```
+
+where **target** is the name of the file or action;
+
+##### Conventions
+
+filename = makefile or Makefile
+$@ = name of the file to be made
+$* = prefix shared by target/dependent files
+$< = name of related file that caused the action
+$? = names of changed dependents
+CC = compiling c
+CXX = compiling c++
+
+
+### Makefiles Examples
+
+```
+CC=gcc
+CFLAGS=-I
+DEPS = hellomake.h				
+OBJ = hellomake.o hellofunc.o	
+
+%.o: %.c $(DEPS)
+	$(CC) -o $@ $< $(CCFLAGS)
+```
+
+
+### Docs:
+www.gnu.org/software/make
+www.gnu.org/software/make/manual/make.html
