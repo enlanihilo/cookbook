@@ -2,7 +2,7 @@
 
 //		with getchar() and putchar() you can write a 
 //		surprising amount of useful code without
-//		knowing anything more about input and output.:w
+//		knowing anything more about input and output.
 
 int main(void)
 {	
