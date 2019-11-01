@@ -2,11 +2,11 @@
 
   - [x] Hello, world
   - [x] Getting user input from stdin
+  - [x] Guessing Game
   - [x] Taking command line arguments
-  -  Guessing Game
+  -  Making HTTP requests
   -  Reading and writing files
   -  Using TCP sockets
-  -  Making HTTP requests
   -  Parsing JSON
   -  Creating a CSV file
   -  Making database connections
