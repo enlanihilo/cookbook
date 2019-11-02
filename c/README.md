@@ -3,8 +3,8 @@
   - [x] Hello, world
   - [x] Howto Makefiles 
   - [x] Getting user input from stdin
-  -  Taking command line arguments
-  -  Guessing Game
+  - [x] Taking command line arguments
+  - [x] Guessing Game
   -  Reading and writing files
   -  Using TCP sockets
   -  Making HTTP requests
