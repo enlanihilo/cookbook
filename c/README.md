@@ -5,8 +5,8 @@
   - [x] Getting user input from stdin
   - [x] Taking command line arguments
   - [x] Guessing Game
-  -  Reading and writing files
-  -  Using TCP sockets
+  - [x] Reading and writing files
+  - [x] Using TCP sockets
   -  Making HTTP requests
   -  Parsing JSON
   -  Creating a CSV file
