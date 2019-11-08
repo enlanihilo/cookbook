@@ -7,6 +7,7 @@
   - [x] Guessing Game
   - [x] Reading and writing files
   - [x] Using TCP sockets
+  - [x] Heap memory manipulation
   -  Making HTTP requests
   -  Parsing JSON
   -  Creating a CSV file
