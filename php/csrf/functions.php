@@ -15,25 +15,33 @@
 		//base64 encode it
 		return base64_encode($encoded_session);
 	}
-
+	
 	function decode_session_cookie()
 	{
-		$sessionId = $_COOKIE['sessId'];
+		global $specialToken;
+		global $users;
 
-		//base64 decode
-		base64_decode($sessionId);
-	
+		//base64 decode cookie
+		$sessid = base64_decode($_COOKIE['sessId']);
+		
+		// strip specialToken away from cookie
+		$userFromCookie = str_replace($specialToken, '', $sessid);
+
 		//verify if $specialToken is present
-		if (preg_match('/' . $specialToken  . '/', $sessId))
+		if ( $userFromCookie )
 		{
-			// extract username from cookie
-			$userFromCookie = str_replace($specialToken, "", $sessId);
-		}
+			echo 'user: ';
+			echo $userFromCookie;
 
-		//check if username exists in users "db"
-		if (isset($users[$userFromCookie]))
+			if (isset($users[$userFromCookie]))
+			{
+				echo "<br>username will be changed!";
+			}
+		}
+		else
 		{
-			echo "username will be changed!";
+			die('Forbidden');
+			return false;
 		}
 
 		return true;

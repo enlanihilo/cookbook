@@ -19,7 +19,7 @@
 			<!--profile actions-->
 			<form id="changeUser" action="/actions.php" method="GET">
 				<input type="text" name="newuser">
-				<input type="hidden" name="csrfToken" value="<?php echo $_COOKIE['sessId']; ?>>">
+				<input type="hidden" name="csrfToken" value="<?php echo $_COOKIE['sessId']; ?>">
 				<input type="submit" value="change username">
 			</form>
 			<form id="changePwd" action="/actions.php" method="GET">
