@@ -1,3 +1,10 @@
+<?php
+
+	header('Access-Control-Allow-Origin: https://stackoverflow.com');
+	header('X-Powered-By: ');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

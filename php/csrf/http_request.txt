@@ -1,0 +1,5 @@
+GET /actions.php
+
+Host: localhost:9999
+User-Agent: Curl
+Cookie: sessId=YWRtaW5hOTd4djk4eDA5

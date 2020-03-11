@@ -15,6 +15,13 @@
 		header('HTTP/1.0 403 Forbidden');
 		die('Access denied');
 	} 
+	else if (isset($_POST['session']) && $_POST['session'] == 'kill')
+	{
+
+		setcookie('sessId', '');
+		header('HTTP/1.0 301');	
+		header('Location: /index.php');
+	}
 	else
 	{
 		// verify if user and sessId match
