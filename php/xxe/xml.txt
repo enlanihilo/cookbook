@@ -1,0 +1,4 @@
+<creds>
+	<user>Ed</user>
+	<pass>mypass</pass>
+</creds>

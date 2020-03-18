@@ -1,0 +1,36 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-size: 14px;
+	background: #777;
+}
+
+li {
+	list-style: none;
+}
+
+li a {
+	color: orange;
+	margin-left: 10px;
+}
+
+nav ul {
+	display: flex;
+	background: #333;
+}
+
+.container {
+	margin-top: 1em;
+	background: #555;
+}
+
+.pd1 {
+	padding: 1em;
+}
+
+.pd2 {
+	padding: 2em;
+}
