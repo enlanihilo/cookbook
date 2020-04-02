@@ -1,0 +1,105 @@
+ 
+body {
+    background: #333;
+    color: whitesmoke;
+    margin: 0;
+}
+
+main {
+    padding: 2em;
+}
+
+h1,h2,h3 {
+    text-transform: capitalize;
+}
+
+nav {
+    margin: 0;
+    padding: 0.5em;
+    border-bottom: 3px solid black;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 1em;
+    border-bottom: 1px solid gray;
+    padding: 0.3em;
+}
+
+.nav-link {
+    color: orange;
+    text-spacing: 0.2em;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: darkorange;
+}
+
+.nav-link:active {
+    color: darkslategrey;
+}
+
+.mt-1 {
+    margin-top: 1em;
+}
+
+.pt-1 {
+    padding-top: 1em;
+}
+
+.p-1 {
+    padding: 1em;
+}
+
+.hidden {
+    display: hidden;
+}
+
+.input-container {
+    margin: 0.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container > * {
+    display: block;
+    width: 200px;
+}
+
+.btn {
+    border: none;
+    padding: .5em;
+    width: 200px;
+    color: #111;
+    background: orange;
+    box-shadow: 1px 2px 2px black;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn:hover {
+    position: relative;
+    top: 1px;
+}
+
+.btn:active {
+    top: 2px;
+}
+
+.error-container {
+    background: #444;
+    text-align: center;
+    border: 1px solid red;
+}
+
+.error {
+    color: red;
+    font-weight: 700;
+}
+
