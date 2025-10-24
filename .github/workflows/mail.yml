@@ -1,4 +1,5 @@
-name: CD Usn Deploy
+name: Change CD-CI User
+
 on:
   workflow_dispatch:
     inputs:
