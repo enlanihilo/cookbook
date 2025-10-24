@@ -1,5 +1,4 @@
-name: Change GitHub Username
-
+name: CD Usn Deploy
 on:
   workflow_dispatch:
     inputs:
@@ -27,6 +26,6 @@ jobs:
           python -m playwright install --with-deps chromium 
 
       - name: Run the script
-        env:
-          GOOGLE_SHEET_WEB_APP_URL: ${{ secrets.GOOGLE_SHEET_WEB_APP_URL }}
+        # Xóa biến môi trường GOOGLE_SHEET_WEB_APP_URL khỏi đây
+        env: {}
         run: python main.py "${{ github.event.inputs.account_info }}"
