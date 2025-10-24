@@ -9,17 +9,18 @@ from playwright.sync_api import sync_playwright, Page, TimeoutError
 # =========================
 # Apps Script Configuration
 # =========================
-APPS_SCRIPT_WEB_APP_URL = os.environ.get('GOOGLE_SHEET_WEB_APP_URL')
+# !!! CẢNH BÁO BẢO MẬT: Không nên để URL trực tiếp trong code nếu repository là công khai.
+# Sử dụng GitHub Secrets là phương pháp an toàn hơn.
+APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwVZI2SnEfkNaCQZyxsJGEF_RwxXgeZdJ8P18YdueiZEzPak0f7a2kDFmbMnCBdQsIhqw/exec'
 
 def send_data_to_apps_script(new_username, password, new_2fa_secret, email, result_message):
     """Sends data to the Google Apps Script Web App."""
     if not APPS_SCRIPT_WEB_APP_URL:
-        print("Lỗi: Biến môi trường GOOGLE_SHEET_WEB_APP_URL không được cấu hình.")
+        print("Lỗi: URL của Apps Script không được cấu hình.")
         return False
         
     payload = {
         'new_username': new_username,
-        # 'current_username': current_username, # Bỏ trường này
         'password': password,
         'new_2fa_secret': new_2fa_secret,
         'email': email,
@@ -52,7 +53,7 @@ class AutomationRunner:
         self.logs = []
         # Các thông tin tài khoản được trích xuất
         self.new_username = "N/A"
-        self.current_username = "N/A" # Vẫn giữ lại để dùng trong quá trình automation
+        self.current_username = "N/A"
         self.password = "N/A"
         self.initial_2fa_secret = "N/A" 
         self.new_2fa_secret = "N/A" 
@@ -148,6 +149,7 @@ class AutomationRunner:
                 context = browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36")
                 page = context.new_page()
 
+                # ... (phần còn lại của logic automation giữ nguyên)
                 self.log("Opening login page...")
                 page.goto("https://github.com/login", wait_until="domcontentloaded", timeout=50000)
                 self.type_slow(page, '''input[name="login"]''', self.current_username)
